@@ -37,7 +37,7 @@ def TransformWords(data):
         for word in newi:
             if word not in stopwords.words("english"):
                 list1.append(wne.lemmatize(word))
-        corpus.append("".join(list1))
+        corpus.append(" ".join(list1))
     return corpus
 
 x_train_clean = TransformWords(x_train)
@@ -53,7 +53,7 @@ x_test_new = cv.transform(x_test_clean)
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 
-model = RandomForestClassifier(n_estimators=300)
+model = RandomForestClassifier(n_estimators=100)
 model.fit(x_train_new, y_train)
 predictions_training = model.predict(x_train_new)
 print(classification_report(y_train, predictions_training))
@@ -70,12 +70,14 @@ def sentiment(text):
         print("Positive")
 
 data1 = ["I ate Pizza for dinner and I hated it"]
-data2 = ["I did not like doing my homework"]
-data3 = ["I like going for shopping"]
-data4 = ["I love playing with my friends"]
+data2 = ["The weather is good and I am excited"]
+data3 = ["I am happy to go shopping"]
+data4 = ["I am joyful playing with my friends"]
 data5 = ["I'm nervous for my exam marks"]
+data6 = ["I'm scared for my life!"]
 sentiment(data1)
 sentiment(data2)
 sentiment(data3)
 sentiment(data4)
 sentiment(data5)
+sentiment(data6)
